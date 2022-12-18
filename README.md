@@ -21,10 +21,9 @@ Apartments System With Rent for QB-Core Framework :office:
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
-Origian Script
+##Origian Script
 https://github.com/XxJxsperxX/qb-apartments
 
-Installation
 ## Installation
 ### Manual
 1.  Backup existing QB-Apartments
