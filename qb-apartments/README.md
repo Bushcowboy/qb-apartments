@@ -19,10 +19,8 @@ Apartments System With Rent for QB-Core Framework :office:
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
-## Screenshots
-![Moving to Apartment with Price](https://i.imgur.com/oPEHbFG.png)
-![Money Taken Out for Moving In](https://i.imgur.com/V4CMjTz.png)
-![Bank Statement](https://i.imgur.com/H2OWxZF.png)
+## Original Script
+https://github.com/XxJxsperxX/qb-apartments
 
 ## Installation
 ### Manual
