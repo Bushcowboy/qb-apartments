@@ -3,6 +3,8 @@ Qb Apartments With Target and Rent
 # qb-apartments
 Apartments System With Rent for QB-Core Framework :office:
 
+## to change the lang change en to the lang you use do not switch it in the fxmanifest it breaks for no reason
+
 # License
 
     QBCore Framework
