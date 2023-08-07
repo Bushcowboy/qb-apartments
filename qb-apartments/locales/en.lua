@@ -18,6 +18,7 @@ local Translations = {
         logout = 'Logout Character',
         change_outfit = 'Change Outfit',
         open_stash = 'Open Stash',
+        open_fridge = 'Open Fridge',
         move_here = 'Move Here',
         open_door = 'Open Door',
         leave = 'Leave Apartment',
