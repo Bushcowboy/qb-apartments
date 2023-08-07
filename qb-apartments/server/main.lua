@@ -237,8 +237,12 @@ end)
 
 
 RegisterServerEvent('apartments:rent')
-AddEventHandler('apartments:rent', function(ap, amount) 
+AddEventHandler('apartments:rent', function(ap, amount)
     local Player = QBCore.Functions.GetPlayer(source)
-    Player.Functions.RemoveMoney('bank', tonumber(amount), 'apartment-rent')
-    TriggerClientEvent('QBCore:Notify', source, "Paid $"..amount.." for "..ap.."", "success", 5000)
+    if Player then
+        Player.Functions.RemoveMoney('bank', tonumber(amount), 'apartment-rent')
+        TriggerClientEvent('QBCore:Notify', source, "Paid $"..amount.." for "..ap, "success", 5000)
+    else
+        print("Player not found.")
+    end
 end)
