@@ -1,5 +1,7 @@
 # qb-apartments
 Qb Apartments With Target and Rent
+
+
 this is now  made for lev_apartment shell so  follow his istall steps then with the offsets add this 
         obj[2].fridge = json.decode('{"x": -0.36, "y": -3.17699, "z": 0.960894, "h": 181.75}')
         bellow  the  stash
