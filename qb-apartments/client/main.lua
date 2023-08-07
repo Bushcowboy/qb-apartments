@@ -16,6 +16,7 @@ local InApartmentTargets = {}
 -- polyzone variables - used when Config.UseTarget is false
 local IsInsideEntranceZone = false
 local IsInsideExitZone = false
+local IsInsideFridgeZone = false
 local IsInsideStashZone = false
 local IsInsideOutfitsZone = false
 local IsInsideLogoutZone = false
@@ -91,6 +92,10 @@ local function RegisterInApartmentZone(targetKey, coords, heading, text)
             IsInsideStashZone = isPointInside
         end
 
+        if targetKey == "fridgePos" then
+            IsInsideFridgeZone = isPointInside
+        end
+
         if targetKey == "outfitsPos" then
             IsInsideOutfitsZone = isPointInside
         end
@@ -127,10 +132,13 @@ local function SetInApartmentTargets()
 
     local entrancePos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.exit.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.exit.y - 0.5, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z)
     local stashPos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.stash.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.stash.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z)
+    local fridgePos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.fridge.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.fridge.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.fridge.z)
+
     local outfitsPos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.clothes.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.clothes.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z)
     local logoutPos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.logout.x, Apartments.Locations[ClosestHouse].coords.enter.y + POIOffsets.logout.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z)
 
     RegisterInApartmentZone('stashPos', stashPos, 0, "[E] " .. Lang:t('text.open_stash'))
+    RegisterInApartmentZone('fridgePos', fridgePos, 0, "[E] " .. Lang:t('text.open_fridge'))
     RegisterInApartmentZone('outfitsPos', outfitsPos, 0, "[E] " .. Lang:t('text.change_outfit'))
     RegisterInApartmentZone('logoutPos', logoutPos, 0, "[E] " .. Lang:t('text.logout'))
     RegisterInApartmentZone('entrancePos', entrancePos, 0, Lang:t('text.options'))
@@ -150,6 +158,7 @@ end
 
 local function DeleteInApartmentTargets()
     IsInsideStashZone = false
+    IsInsideFridgeZone = false
     IsInsideOutfitsZone = false
     IsInsideLogoutZone = false
 
@@ -266,6 +275,8 @@ local function SetInApartmentTargets()
     
     local entrancePos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.exit.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.exit.y - 0.5, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z)
     local stashPos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.stash.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.stash.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z)
+    local fridgePos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.fridge.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.fridge.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.fridge.z)
+
     local outfitsPos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.clothes.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.clothes.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z)
     local logoutPos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.logout.x, Apartments.Locations[ClosestHouse].coords.enter.y + POIOffsets.logout.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z)
 
@@ -292,6 +303,15 @@ local function SetInApartmentTargets()
                 label = Lang:t('text.open_stash'),
             },
         })
+        --Fridge
+        RegisterInApartmentTarget('fridgePos', fridgePos, 0, {
+            {
+                type = "client",
+                event = "apartments:client:OpenFridge",
+                icon = "fas fa-door-open",
+                label = Lang:t('text.open_fridge'),
+            },
+        })
         RegisterInApartmentTarget('outfitsPos', outfitsPos, 0, {
             {
                 type = "client",
@@ -311,6 +331,7 @@ local function SetInApartmentTargets()
     else
         RegisterInApartmentZone('entrancePos', entrancePos, 0, Lang:t('text.options'))
         RegisterInApartmentZone('stashPos', stashPos, 0, "[E] " .. Lang:t('text.open_stash'))
+        RegisterInApartmentZone('fridgePos', fridgePos, 0, "[E] " .. Lang:t('text.open_fridge')) -- Fridge Pos
         RegisterInApartmentZone('outfitsPos', outfitsPos, 0, "[E] " .. Lang:t('text.change_outfit'))
         RegisterInApartmentZone('logoutPos', logoutPos, 0, "[E] " .. Lang:t('text.logout'))
     end
@@ -338,6 +359,7 @@ end
 local function DeleteInAparmtnetTargets()
     IsInsideExitZone = false
     IsInsideStashZone = false
+    IsInsideFridgeZone = false
     IsInsideOutfitsZone = false
     IsInsideLogoutZone = false
 
@@ -754,6 +776,14 @@ RegisterNetEvent('apartments:client:OpenStash', function()
         TriggerEvent("inventory:client:SetCurrentStash", CurrentApartment)
     end
 end)
+RegisterNetEvent('apartments:client:OpenFridge', function()
+    if CurrentApartment ~= nil then
+        TriggerServerEvent("inventory:server:OpenInventory", "stash", CurrentApartment)
+        TriggerServerEvent("InteractSound_SV:PlayOnSource", "StashOpen", 0.4)
+        TriggerEvent("inventory:client:SetCurrentStash", CurrentApartment)
+    end
+end)
+
 
 RegisterNetEvent('apartments:client:ChangeOutfit', function()
     TriggerServerEvent("InteractSound_SV:PlayOnSource", "Clothes1", 0.4)
@@ -812,6 +842,14 @@ CreateThread(function ()
                 end
             end
 
+            if IsInsideFridgeZone then
+                sleep = 0
+                if IsControlJustPressed(0, 38) then
+                    TriggerEvent('apartments:client:OpenFridge')
+                    exports['qb-core']:HideText()
+                end
+            end
+
             if IsInsideOutfitsZone then
                 sleep = 0
                 if IsControlJustPressed(0, 38) then
@@ -850,17 +888,22 @@ end)
 --     end
 -- end)
 
-CreateThread(function ()
+CreateThread(function()
     if LocalPlayer.state.isLoggedIn then
         local seconds = 1000
         local minutes = 60 * seconds
         local hour = 60 * minutes
         Citizen.Wait(hour)
+
         QBCore.Functions.TriggerCallback('apartments:GetOwnedApartment', function(result)
             if result ~= nil then
                 if Apartments.Locations[result.type].price ~= nil then
                     TriggerServerEvent("apartments:rent", result.label, Apartments.Locations[result.type].price)
+                else
+                    print("Apartment price is not available.")
                 end
+            else
+                print("No owned apartment found.")
             end
         end)
     end
