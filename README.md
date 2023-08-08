@@ -34,12 +34,11 @@ change en to the lang you use do not switch it in the fxmanifest it breaks for n
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
-## Origial Script
-Just added Target compatibility https://github.com/XxJxsperxX/qb-apartments
-
 ## Dependencies/shout outs
 https://github.com/levdevlev/lev-apartments
 https://github.com/XxJxsperxX/qb-apartments
+
+
 
 
 ## Installation
