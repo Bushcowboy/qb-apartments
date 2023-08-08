@@ -1,6 +1,5 @@
 # qb-apartments
 Qb Apartments With Target and Rent
-https://github.com/levdevlev/lev-apartments
 
 ```
 this is now  made for lev_apartment shell so  follow his istall steps then with the offsets add this
@@ -37,6 +36,11 @@ change en to the lang you use do not switch it in the fxmanifest it breaks for n
 
 ## Origial Script
 Just added Target compatibility https://github.com/XxJxsperxX/qb-apartments
+
+## Dependencies/shout outs
+https://github.com/levdevlev/lev-apartments
+https://github.com/XxJxsperxX/qb-apartments
+
 
 ## Installation
 ### Manual
