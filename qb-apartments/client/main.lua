@@ -130,7 +130,7 @@ local function SetInApartmentTargets()
         return
     end
 
-    local entrancePos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.exit.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.exit.y - 0.5, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z)
+    local entrancePos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x + POIOffsets.exit.x, Apartments.Locations[ClosestHouse].coords.enter.y + POIOffsets.exit.y - 0.5, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z)
     local stashPos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.stash.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.stash.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z)
     local fridgePos = vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.fridge.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.fridge.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.fridge.z)
 
